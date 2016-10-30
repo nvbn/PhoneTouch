@@ -1,0 +1,5 @@
+export const ACTION_PAIR = 'ACTION_PAIR';
+export const ACTION_PAIRED = 'ACTION_PAIRED';
+export const ACTION_UNPAIR = 'ACTION_UNPAIR';
+
+export const ACTION_PANEL_UPDATED = 'ACTION_PANEL_UPDATED';

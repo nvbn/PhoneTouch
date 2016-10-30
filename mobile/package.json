@@ -1,0 +1,31 @@
+{
+  "name": "PhoneTouch",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "firebase": "^3.5.2",
+    "react": "15.3.2",
+    "react-native": "0.36.0",
+    "react-native-camera": "github:lwansbrough/react-native-camera",
+    "react-native-keep-awake": "^1.0.7",
+    "react-native-vector-icons": "^3.0.0",
+    "react-redux": "^4.4.5",
+    "redux": "^3.6.0",
+    "redux-persist": "^4.0.0-alpha6",
+    "redux-thunk": "^2.1.0"
+  },
+  "jest": {
+    "preset": "jest-react-native"
+  },
+  "devDependencies": {
+    "babel-jest": "16.0.0",
+    "babel-preset-react-native": "1.9.0",
+    "jest": "16.0.2",
+    "jest-react-native": "16.0.0",
+    "react-test-renderer": "15.3.2"
+  }
+}
