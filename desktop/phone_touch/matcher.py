@@ -1,5 +1,6 @@
 from pathlib import Path
 from imp import load_source
+from .types import Spacer
 
 
 def _get_rules():
@@ -14,7 +15,8 @@ def _get_rules():
 _rules = _get_rules()
 
 
-def get_buttons(window):
+def get_controls(window):
     for rule in _rules:
         if rule.match(window):
-            yield from rule.get_buttons(window)
+            yield from rule.get_controls(window)
+            yield Spacer()

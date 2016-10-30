@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import TouchPanel from '../components/touch-panel';
-import { panelSubscribe, panelClicked } from '../actions';
+import { panelSubscribe, panelInteracted } from '../actions';
 
 const mapStateToProps = ({session}) => ({
-  buttons: session.buttons,
+  controls: session.controls,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({
     subscribe: panelSubscribe,
-    clicked: panelClicked,
+    interacted: panelInteracted,
   }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TouchPanel);

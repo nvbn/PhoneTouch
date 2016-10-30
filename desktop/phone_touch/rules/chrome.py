@@ -7,10 +7,10 @@ def match(window):
     return 'Google Chrome' in window.title
 
 
-def get_buttons(window):
+def get_controls(window):
     return [
-        Button('chrome-new-tab', 'Open new tab', 'tab', 'ctrl+t'),
-        Button('chrome-close-tab', 'Close tab', 'close', 'ctrl+w'),
-        Button('chrome-back', 'Back', 'arrow-back', 'alt+Left'),
-        Button('chrome-reload', 'Reload page', 'loop', 'F5'),
+        Button('tab', 'ctrl+t'),
+        Button('close', 'ctrl+w'),
+        Button('arrow-back', 'alt+Left'),
+        Button('loop', 'F5'),
     ]

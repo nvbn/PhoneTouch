@@ -8,7 +8,7 @@ def match(window):
            or 'term' in window.executable[-1].lower()
 
 
-def get_buttons(window):
+def get_controls(window):
     return [
-        Button('term-kill', 'Terminal Kill', 'close', 'ctrl+c'),
+        Button('close', 'ctrl+c'),
     ]

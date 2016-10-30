@@ -20,7 +20,7 @@ def main():
     ui = Ui(pair_code)
     ui.show()
     sync = Sync(pair_code)
-    watcher = Watcher(1, sync.update_buttons)
+    watcher = Watcher(1, sync.update_controls)
     sys.exit(app.exec())
 
 

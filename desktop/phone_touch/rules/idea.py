@@ -7,8 +7,8 @@ def match(window):
     return 'IDEA' in window.title
 
 
-def get_buttons(window):
+def get_controls(window):
     return [
-        Button('idea-run', 'Run', 'play-for-work', 'shift+F10'),
-        Button('idea-rerun', 'Rerun', 'replay', 'ctrl+F5'),
+        Button('play-for-work', 'shift+F10'),
+        Button('replay', 'ctrl+F5'),
     ]

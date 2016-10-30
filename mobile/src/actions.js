@@ -13,7 +13,7 @@ export const panelSubscribe = () => (dispath, getState) => {
     const val = snapshot.val();
 
     if (pairId === getState().pairing.id) {
-      dispath(panelUpdated(val ? val.buttons : []));
+      dispath(panelUpdated(val ? val.controls : []));
     } else {
       unsubscribe()
     }
@@ -23,16 +23,16 @@ export const panelSubscribe = () => (dispath, getState) => {
   ref.once('value').then(update);
 };
 
-export const panelUpdated = (buttons) => ({
+export const panelUpdated = (controls) => ({
   type: constants.ACTION_PANEL_UPDATED,
-  buttons: buttons,
+  controls: controls,
 });
 
-export const panelClicked = (button) => (dispatch, getState) => {
+export const panelInteracted = (control) => (dispatch, getState) => {
   const pairId = getState().pairing.id;
 
-  db.ref(`pair/${pairId}/click/${button.id}`).set({
-    ...button,
+  db.ref(`pair/${pairId}/interaction/${control.id}`).set({
+    ...control,
     last: Date.now(),
   });
 };

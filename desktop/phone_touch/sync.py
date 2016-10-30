@@ -1,5 +1,6 @@
 import pyrebase
-from .matcher import get_buttons
+from subprocess import Popen
+from .matcher import get_controls
 from .system import send_key
 from .config import firebase
 
@@ -8,26 +9,33 @@ class Sync(object):
     def __init__(self, pair_code):
         self._pair_code = pair_code
         self._db = pyrebase.initialize_app(firebase).database()
-        self._listen_to_clicks()
+        self._listen_to_interactions()
 
     @property
     def _root(self):
         return self._db.child('pair') \
             .child(self._pair_code)
 
-    def _on_click(self, data):
-        print('click', data)
-        hotkey = data.get('data', {}).get('hotkey')
-        if hotkey:
-            send_key(hotkey)
+    def _on_interaction(self, data):
+        control = data.get('data')
+        if not control:
+            return
 
-    def _listen_to_clicks(self):
+        if control['type'] in ('Button', 'CheckableButton'):
+            if control['hotkey']:
+                send_key(control['hotkey'])
+            elif control['command']:
+                Popen(control['command'], shell=True)
+        elif control['type'] == 'Slider':
+            Popen(control['command'].format(control['value']), shell=True)
+
+    def _listen_to_interactions(self):
         self._root \
-            .child('click') \
-            .stream(self._on_click)
+            .child('interaction') \
+            .stream(self._on_interaction)
 
-    def update_buttons(self, window):
+    def update_controls(self, window):
         self._root \
             .child('panel') \
-            .child('buttons') \
-            .set([button._asdict() for button in get_buttons(window)])
+            .child('controls') \
+            .set([control.as_dict for control in get_controls(window)])
