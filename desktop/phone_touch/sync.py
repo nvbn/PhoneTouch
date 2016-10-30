@@ -18,7 +18,7 @@ class Sync(object):
 
     def _on_interaction(self, data):
         control = data.get('data')
-        if not control:
+        if not control or not control.get('type'):
             return
 
         if control['type'] in ('Button', 'CheckableButton'):
