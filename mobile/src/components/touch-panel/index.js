@@ -4,9 +4,17 @@ import isObject from 'lodash/isObject';
 import isString from 'lodash/isString';
 import KeepAwake from 'react-native-keep-awake';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import * as types from '../../types';
 import styles from './styles';
 
+
 class TouchPanel extends Component {
+  props: {
+    subscribe: () => void,
+    toSettings: () => void,
+    controls: types.Control[],
+  };
+
   constructor() {
     super();
     this._renderControl = this._renderControl.bind(this);

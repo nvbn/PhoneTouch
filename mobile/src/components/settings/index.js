@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import { View, TextInput, Text, Button, BackAndroid } from 'react-native';
+import * as types from '../../types';
 import styles from './styles';
 
 class Settings extends Component {
+  props: {
+    save: (value: types.Settings) => void,
+    back: () => void,
+    settings: types.Settings,
+  };
+
+  state: {
+    url: ?string,
+  };
+
   constructor() {
     super();
     this._saveSettings = this._saveSettings.bind(this);
@@ -13,7 +24,10 @@ class Settings extends Component {
       this.props.back();
       return true;
     });
-    this.setState({url: this.props.url});
+  }
+
+  componentWillMount() {
+    this.setState({url: this.props.settings.url});
   }
 
   componentWillUnmount() {
@@ -31,7 +45,7 @@ class Settings extends Component {
     return (<View style={styles.container}>
       <Text style={styles.title}>Settings</Text>
       <Text>Server URL</Text>
-      <TextInput defaultValue={this.props.url}
+      <TextInput defaultValue={this.state.url}
                  onChangeText={(text) => this.setState({url: text})}/>
       <View style={styles.buttonsHolder}>
         <View style={styles.button}>

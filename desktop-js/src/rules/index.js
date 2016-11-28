@@ -1,5 +1,6 @@
 import identity from 'lodash/identity';
 import flatten from 'lodash/flatten';
+import { Control } from '../types';
 import chrome from './chrome';
 import pulseaudio from './pulseaudio';
 import idea from './idea';
@@ -9,7 +10,7 @@ import vlc from './vlc';
 
 export const rules = [pulseaudio, player, chrome, idea, netflix, vlc];
 
-export const getControls = (data) =>
+export const getControls = (data): Control[] =>
   flatten(
     rules.map((rule) => {
       try {

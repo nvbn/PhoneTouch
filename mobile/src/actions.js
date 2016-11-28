@@ -1,6 +1,6 @@
 import * as constants from './constants';
 
-let ws;
+let ws: WebSocket;
 
 export const subscribe = () => (dispath, getState) => {
   const repeat = () => setTimeout(() => subscribe()(dispath, getState), 5000);

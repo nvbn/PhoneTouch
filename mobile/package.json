@@ -21,6 +21,7 @@
     "preset": "jest-react-native"
   },
   "devDependencies": {
-    "babel-preset-react-native": "1.9.0"
+    "babel-preset-react-native": "1.9.0",
+    "flow-bin": "^0.36.0"
   }
 }

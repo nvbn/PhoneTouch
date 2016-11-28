@@ -4,8 +4,8 @@ import Settings from '../components/settings';
 import { settingsSave } from '../actions';
 
 const mapStateToProps = ({settings}, {navigator}) => ({
-  url: settings.url,
   back: () => navigator.pop(),
+  settings,
 });
 
 const mapDispatchToProps = (dispatch) =>

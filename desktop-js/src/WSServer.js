@@ -1,8 +1,9 @@
 import http from 'http';
 import { Server } from 'ws';
+import { RemoteCallback, Control } from './types';
 
 class WSServer {
-  constructor(port, runCallback) {
+  constructor(port: number, runCallback: RemoteCallback) {
     const server = http.createServer();
     server.listen(port);
 
@@ -12,7 +13,7 @@ class WSServer {
         (data) => runCallback(JSON.parse(data))));
   }
 
-  send(data) {
+  send(data: Control[]) {
     for (const client of this._ws.clients) {
       client.send(JSON.stringify(data));
     }
