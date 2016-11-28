@@ -7,33 +7,23 @@ At this time only linux supported.
 ## Supported apps
 
 * Chrome;
-* Terminal;
 * Intellij Idea;
+* VLC;
+* Netflix;
 * Players like spotify.
-
-## Setup for developers
-
-Create firebase account, create configs from template and fill it:
-
-* `desktop/phone_touch/config.py[.template]` &ndash; for desktop client;
-* `mobile/config.js.template` &ndash; for mobile client.
 
 ### Desktop
 
-Install PyQt5 and xdotool:
+Install dependencies:
 
 ```bash
-sudo apt install python3-pyqt5 xdotool
+npm install
 ```
-Install python dependencies:
+
+Run server:
 
 ```bash
-python3 setup.py install
-```
-Run desktop client with:
-
-```bash
-python3 -m phone_touch.main
+npm start
 ```
 
 ### Mobile
