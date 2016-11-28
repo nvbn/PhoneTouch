@@ -24,6 +24,7 @@ project.xcworkspace
 
 # Android/IJ
 #
+*.iml
 .idea
 .gradle
 local.properties
@@ -36,16 +37,5 @@ npm-debug.log
 # BUCK
 buck-out/
 \.buckd/
-
 android/app/libs
-
-# Relise files
-*.zip
-main.jsbundle.meta
-main.jsbundle
-fastlane/report.xml
-
-.reports
-
-config.js
-
+*.keystore

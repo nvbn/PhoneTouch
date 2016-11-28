@@ -1,38 +1,43 @@
 import * as constants from './constants';
-import db from './db';
 
-// export pair = () => ({
-//   type:
-// });
+let ws;
 
-export const panelSubscribe = () => (dispath, getState) => {
-  const pairId = getState().pairing.id;
-  const ref = db.ref(`pair/${pairId}/panel`);
+export const subscribe = () => (dispath, getState) => {
+  const repeat = () => setTimeout(() => subscribe()(dispath, getState), 5000);
 
-  const update = (snapshot) => {
-    const val = snapshot.val();
+  const url = getState().settings.url;
 
-    if (pairId === getState().pairing.id) {
-      dispath(panelUpdated(val ? val.controls : []));
-    } else {
-      unsubscribe()
-    }
+  if (!url) {
+    console.warn('Please set url in settings');
+    repeat();
+    return;
+  }
+
+  try {
+    ws = new WebSocket(url);
+  } catch (e) {
+    repeat();
+    return;
+  }
+
+  ws.onmessage = ({data}) => {
+    dispath(updated(JSON.parse(data)));
   };
 
-  const unsubscribe = ref.on('value', update);
-  ref.once('value').then(update);
+  ws.onclose = repeat;
+  ws.onerror = repeat;
 };
 
-export const panelUpdated = (controls) => ({
+export const updated = (controls) => ({
   type: constants.ACTION_PANEL_UPDATED,
   controls: controls,
 });
 
-export const panelInteracted = (control) => (dispatch, getState) => {
-  const pairId = getState().pairing.id;
-
-  db.ref(`pair/${pairId}/interaction/${control.id}`).set({
-    ...control,
-    last: Date.now(),
-  });
+export const callbackCalled = (callback) => (dispatch, getState) => {
+  ws.send(JSON.stringify(callback));
 };
+
+export const settingsSave = (value) => ({
+  type: constants.SETTINGS_SAVE,
+  value,
+});

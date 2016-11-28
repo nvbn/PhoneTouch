@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, Text, TouchableHighlight, StatusBar, Slider } from 'react-native';
+import isObject from 'lodash/isObject';
+import isString from 'lodash/isString';
 import KeepAwake from 'react-native-keep-awake';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
@@ -8,57 +10,84 @@ class TouchPanel extends Component {
   constructor() {
     super();
     this._renderControl = this._renderControl.bind(this);
+    this._prepareArg = this._prepareArg.bind(this);
+    this._components = {View, Image, Icon, TouchableHighlight, Slider, Text};
   }
 
   componentDidMount() {
     this.props.subscribe();
   }
 
-  _renderControl(control) {
-    switch (control.type) {
-      case 'Button':
-        return (
-          <TouchableHighlight key={`button-${control.id}`}
-                              onPress={() => this.props.interacted(control)}
-                              underlayColor="#0f0f0f"
-                              style={styles.button}>
-            <Icon style={styles.buttonIcon} name={control.icon}/>
-          </TouchableHighlight>
-        );
-      case 'CheckableButton':
-        return (
-          <TouchableHighlight key={`checkable-button-${control.id}`}
-                              onPress={() => this.props.interacted(control)}
-                              underlayColor={control.checked ? '#000000' : '#0f0f0f'}
-                              style={control.checked ? [styles.button, styles.checked] : styles.button}>
-            <Icon style={styles.buttonIcon} name={control.icon}/>
-          </TouchableHighlight>
-        );
-      case 'Slider':
-        return (
-          <Slider key={`slider-${control.id}`}
-                  maximumValue={control.end}
-                  minimumValue={control.start}
-                  value={control.current}
-                  style={styles.slider}
-                  onValueChange={(current) => this.props.interacted({
-                    ...control, current,
-                  })}/>
-        );
-      case 'Spacer':
-        return (
-          <View style={styles.button}
-                key={control.id} />
-        );
+  _prepareArg(arg) {
+    try {
+      JSON.stringify(arg);
+      return arg;
+    } catch (e) {
+      return '';
     }
   }
 
+  _callback(callback) {
+    return (...args) => this.props.callbackCalled({
+      args: args.map(this._prepareArg),
+      ...callback
+    })
+  }
+
+  _prepareProps(props) {
+    if (!props)
+      return {};
+
+    for (const key in props) {
+      if (isObject(props[key]) && props[key].callbackId) {
+        props[key] = this._callback(props[key]);
+      }
+    }
+
+    return props;
+  }
+
+  _prepareChildren(children) {
+    if (!children)
+      return null;
+
+    children = children.map(this._renderControl);
+
+    if (children.length === 1) {
+      return children[0];
+    } else {
+      return children;
+    }
+  }
+
+  _renderControl(control) {
+    if (isString(control))
+      return control;
+
+    const component = this._components[control.tag];
+    if (!component) {
+      console.warn('Unexpected component type:', control);
+      return;
+    }
+
+    const props = this._prepareProps(control.props);
+    const children = this._prepareChildren(control.children);
+
+    return React.createElement(component, props, children);
+  }
+
   render() {
+    const controls = this.props.controls || [];
+
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor="#000000"/>
         <KeepAwake />
-        {this.props.controls.map(this._renderControl)}
+        {controls.map(this._renderControl)}
+        <TouchableHighlight style={styles.settings}
+                            onPress={this.props.toSettings}>
+          <Icon name="settings" style={styles.settingsIcon}/>
+        </TouchableHighlight>
       </View>
     );
   }

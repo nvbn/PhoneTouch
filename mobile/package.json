@@ -7,10 +7,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "firebase": "^3.5.2",
-    "react": "15.3.2",
-    "react-native": "0.36.0",
-    "react-native-camera": "github:lwansbrough/react-native-camera",
+    "lodash": "^4.17.2",
+    "react": "15.4.0",
+    "react-native": "0.38.0",
     "react-native-keep-awake": "^1.0.7",
     "react-native-vector-icons": "^3.0.0",
     "react-redux": "^4.4.5",
@@ -22,10 +21,6 @@
     "preset": "jest-react-native"
   },
   "devDependencies": {
-    "babel-jest": "16.0.0",
-    "babel-preset-react-native": "1.9.0",
-    "jest": "16.0.2",
-    "jest-react-native": "16.0.0",
-    "react-test-renderer": "15.3.2"
+    "babel-preset-react-native": "1.9.0"
   }
 }

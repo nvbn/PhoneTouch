@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import pairing from './pairing';
+import settings from './settings';
 import session from './session';
 
-export default combineReducers({session, pairing});
+export default combineReducers({session, settings});

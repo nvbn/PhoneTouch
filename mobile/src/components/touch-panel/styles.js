@@ -4,23 +4,16 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000000',
-    flexDirection: 'row',
+    flexDirection: 'column',
     flexWrap: 'wrap',
   },
-  button: {
-    width: 120,
-    height: 120,
+  settings: {
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
   },
-  buttonIcon: {
-    fontSize: 100,
-    color: '#f8f8f8',
+  settingsIcon: {
+    fontSize: 40,
+    color: '#ffffff',
   },
-  checked: {
-    color: '#0f0f0f',
-  },
-  slider: {
-    width: 240,
-    backgroundColor: '#0f0f0f',
-    height: 120,
-  }
 });
