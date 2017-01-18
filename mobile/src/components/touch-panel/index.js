@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Image, Text, TouchableHighlight, StatusBar, Slider } from 'react-native';
+import * as reactNativeComponents from 'react-native';
+import { View, StatusBar, TouchableHighlight } from 'react-native';
 import isObject from 'lodash/isObject';
 import isString from 'lodash/isString';
 import KeepAwake from 'react-native-keep-awake';
@@ -19,7 +20,7 @@ class TouchPanel extends Component {
     super();
     this._renderControl = this._renderControl.bind(this);
     this._prepareArg = this._prepareArg.bind(this);
-    this._components = {View, Image, Icon, TouchableHighlight, Slider, Text};
+    this._components = {Icon, ...reactNativeComponents};
   }
 
   componentDidMount() {

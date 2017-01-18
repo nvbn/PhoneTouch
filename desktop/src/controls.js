@@ -33,6 +33,7 @@ export const Icon = 'Icon';
 export const TouchableHighlight = 'TouchableHighlight';
 export const Slider = 'Slider';
 export const Text = 'Text';
+export const Button = 'Button';
 
 export default (tag, props, ...children): Control =>
   ({tag, props: prepareProps(props), children});
