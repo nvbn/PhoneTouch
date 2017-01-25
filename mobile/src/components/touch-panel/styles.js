@@ -6,6 +6,7 @@ export default StyleSheet.create({
     backgroundColor: '#000000',
     flexDirection: 'column',
     flexWrap: 'wrap',
+    padding: 10,
   },
   settings: {
     position: 'absolute',
