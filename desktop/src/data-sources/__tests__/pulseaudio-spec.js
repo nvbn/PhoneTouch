@@ -30,8 +30,8 @@ test('When pactl available', () => {
 	Base Volume: 65536 / 100% / 0,00 dB
   `;
   const callback = jest.fn();
-  exec.mockImplementationOnce((cmd, callback) => callback({code: 1}));
-  exec.mockImplementationOnce((cmd, callback) => callback({code: 1}, stdout));
+  exec.mockImplementationOnce((cmd, callback) => callback(null));
+  exec.mockImplementationOnce((cmd, callback) => callback(null, stdout));
 
   pulseaudio(1000, callback);
   jest.runOnlyPendingTimers();

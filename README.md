@@ -10,7 +10,8 @@ At this time only linux supported.
 * Intellij Idea;
 * VLC;
 * Netflix;
-* Players like spotify.
+* Pulseaudio (require pactl);
+* Players like spotify (works better with playerctl).
 
 ### Desktop
 

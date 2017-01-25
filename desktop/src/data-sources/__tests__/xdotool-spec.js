@@ -17,11 +17,11 @@ test('When xdotool not available', () => {
 
 test('When xdotool available', () => {
   const callback = jest.fn();
-  exec.mockImplementationOnce((cmd, callback) => callback({code: 1}));
+  exec.mockImplementationOnce((cmd, callback) => callback(null));
   exec.mockImplementationOnce((cmd, callback) =>
-    callback({code: 1}, 'nvbn@nvbn-XPS13-9333: ~/exp/phonetouch/desktop-js\n3090\n'));
+    callback(null, 'nvbn@nvbn-XPS13-9333: ~/exp/phonetouch/desktop-js\n3090\n'));
   exec.mockImplementationOnce((cmd, callback) =>
-    callback({code: 1}, '/usr/bin/terminal'));
+    callback(null, '/usr/bin/terminal'));
 
   xdotool(1000, callback);
   jest.runOnlyPendingTimers();

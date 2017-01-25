@@ -12,9 +12,10 @@ const getWindow = (callback) =>
       getExecutable(pid, (executable) => callback({title, pid, executable}));
     });
 
-export default (interval, callback) => exec('xdotool', ({code}) => {
-  if (code !== 1)
+export default (interval, callback) => exec('xdotool -h', (error) => {
+  if (error) {
     return;
+  }
 
   setInterval(
     () => getWindow((window) => callback({window})),

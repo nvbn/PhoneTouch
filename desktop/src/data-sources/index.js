@@ -2,8 +2,9 @@ import isEqual from 'lodash/isEqual';
 import { Data } from '../types';
 import xdotool from './xdotool';
 import pulseaudio from './pulseaudio';
+import playerctl from './playerctl';
 
-export const dataSources = [xdotool, pulseaudio];
+export const dataSources = [xdotool, pulseaudio, playerctl];
 
 export const subscribe = (interval: number, callback: (data: Data) => void) => {
   let data = {};

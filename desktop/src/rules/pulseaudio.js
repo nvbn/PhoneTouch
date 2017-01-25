@@ -13,17 +13,20 @@ const setVolume = (volume) => {
 };
 
 export default ({volume}) => {
-  if (isUndefined(volume))
+  if (isUndefined(volume)) {
     return;
+  }
 
-  return (<View key="pulseaudio-group">
-    <Text style={styles.title}
-          key="pulseaudiot-title">Volume</Text>
-    <Slider minimumValue={0}
-            maximumValue={100}
-            onValueChange={setVolume}
-            value={volume}
-            style={styles.slider}
-            key="pulseaudio-slide"/>
-  </View>);
+  return (
+    <View key="pulseaudio-group">
+      <Text style={styles.title}
+            key="pulseaudiot-title">Volume</Text>
+      <Slider minimumValue={0}
+              maximumValue={100}
+              onValueChange={setVolume}
+              value={volume}
+              style={styles.slider}
+              key="pulseaudio-slide"/>
+    </View>
+  );
 };

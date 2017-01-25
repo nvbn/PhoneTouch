@@ -14,9 +14,10 @@ const getVolume = (callback) =>
     callback(volume);
   });
 
-export default (interval, callback) => exec('pactl', ({code}) => {
-  if (code !== 1)
+export default (interval, callback) => exec('pactl -h', (error) => {
+  if (error) {
     return;
+  }
 
   setInterval(
     () => getVolume((volume) => callback({volume})),
