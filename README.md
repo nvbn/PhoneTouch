@@ -13,6 +13,21 @@ At this time only linux supported.
 * Pulseaudio (require pactl);
 * Players like spotify (works better with playerctl).
 
+## Installation
+
+Install and run desktop client:
+
+```bash
+npm install -g phone-touch
+phone-touch
+```
+
+For Android: install apk from [releases page](https://github.com/nvbn/PhoneTouch/releases).
+
+For iOS: you need to manually build app, for more information see next section.
+
+## Development
+
 ### Desktop
 
 Install dependencies:

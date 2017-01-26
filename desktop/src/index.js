@@ -1,7 +1,7 @@
-import { subscribe } from './src/data-sources';
-import { getControls } from './src/rules';
-import { runCallback, reset } from './src/controls';
-import WSServer from './src/WSServer';
+import { subscribe } from './data-sources';
+import { getControls } from './rules';
+import { runCallback, reset } from './controls';
+import WSServer from './WSServer';
 
 const port = process.argv[3] || 9000;
 

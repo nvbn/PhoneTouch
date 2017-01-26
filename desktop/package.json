@@ -1,15 +1,21 @@
 {
   "name": "phone-touch",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.4",
+  "description": "Desktop client for phone-touch",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node index.js",
-    "develop": "nodemon index.js --exec babel-node",
-    "test": "jest --no-cache"
+    "start": "babel-node src/index.js",
+    "develop": "nodemon src/index.js --exec babel-node",
+    "test": "jest --no-cache",
+    "compile": "babel -d lib/ src/",
+    "prepublish": "npm run compile"
   },
-  "author": "",
-  "license": "ISC",
+  "bin": {
+    "phone-touch": "./bin/app.js"
+  },
+  "author": "Vlaidimir Iakovlev <nvbn.rm@gmail.com>",
+  "license": "MIT",
+  "repository": "nvbn/phonetouch",
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-plugin-syntax-flow": "^6.18.0",
@@ -30,5 +36,9 @@
     "unmockedModulePathPatterns": [
       "lodash", "uuid"
     ]
-  }
+  },
+  "files": [
+    "bin",
+    "lib"
+  ]
 }
